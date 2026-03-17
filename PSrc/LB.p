@@ -22,8 +22,11 @@ machine LoadBalancer {
             var target: Worker;
             var targetId: int;
             
+            // randomly select a target
             targetId = choose(numWorker);
             target = workers[targetId];
+
+            // send the request
             send target, eTask, (lb = this, id = targetId, client = task.client);
         }
 

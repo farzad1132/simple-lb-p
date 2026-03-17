@@ -24,8 +24,10 @@ machine LoadBalancerV3 {
             var targetId: int;
             targetId = FindIdle();
             if (targetId != -1) {
+
                 SendTask(targetId, task.client);
             } else {
+                // No idle worker, queue the request
                 queue += (sizeof(queue), task);
             }
         }
@@ -33,6 +35,8 @@ machine LoadBalancerV3 {
         on eTaskResponse do (resp: tTaskResponse) {
             var popTask: tClientTask;
             send resp.client, eClientResponse;
+
+            // If we have a task in the queue, send it to the newly idle worker
             if (sizeof(queue) > 0) {
                 popTask = queue[0];
                 queue -= (0);       // pop from queue
