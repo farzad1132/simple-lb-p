@@ -1,13 +1,13 @@
-test tcSingleWorker [main=SingleWorker]:
+test tcSingleWorkerV1 [main=SingleWorker]:
     assert CorrectnessInvariant in
     (union LoadBalancingModule, {SingleWorker});
 
-test tcTwoWorker [main=TwoWorker]:
+test tcTwoWorkerV1 [main=TwoWorker]:
     assert CorrectnessInvariant in
     (union LoadBalancingModule, {TwoWorker});
 
 
-test tcFourWorker [main=FourWorker]:
+test tcFourWorkerV1 [main=FourWorker]:
     assert CorrectnessInvariant in
     (union LoadBalancingModule, {FourWorker});
 
